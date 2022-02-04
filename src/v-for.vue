@@ -9,7 +9,7 @@
   const course = {
     title : 'INT203 Client II',
     credit: 3,
-    class: 'lecture & lab'
+    class: 'lecture & lab '
   }
   
 </script>
