@@ -1,21 +1,30 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, computed } from 'vue'
+console.clear()
+const myNotes = ref([])
+const newNote = ref('')
+const keywords = ref('')
+const addNote = () => myNotes.value.push(newNote.value)
+const filterSearch = computed( () => 
+  myNotes.value.filter((myNote) =>
+    myNote.toLowerCase().includes(keywords.value.toLowerCase())
+  )
+)
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+<!-- empty array are true , not empty array are still true-->
+<div v-show="myNotes != ''"> 
+  Filter Note: <input type="text" v-model="keywords" >
+  <ul>
+    <li v-for="(myNote, index) in filterSearch" :key="index">
+     {{myNote}}    
+    </li>
+  </ul>
+</div>
+
+  New Note: <input type="text" v-model="newNote" />
+  <button @click="addNote" style="cursor:pointer">Add Note</button>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
